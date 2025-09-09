@@ -1,0 +1,529 @@
+<?php
+// Include database connection
+require_once 'config.php';
+
+// Function to upload files
+function uploadFile($file, $directory = 'images', $allowed_types = ['jpg', 'jpeg', 'png', 'gif']) {
+    global $conn;
+    
+    // Check if the file was uploaded without errors
+    if ($file['error'] === 0) {
+        $file_name = $file['name'];
+        $file_size = $file['size'];
+        $file_tmp = $file['tmp_name'];
+        $file_type = $file['type'];
+        
+        $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+        
+        // Check if file type is allowed
+        if (in_array($file_ext, $allowed_types)) {
+            // Generate unique file name to prevent overwriting
+            $new_file_name = uniqid() . '.' . $file_ext;
+            $upload_path = '../uploads/' . $directory . '/' . $new_file_name;
+            
+            // Create directory if it doesn't exist
+            $dir_path = '../uploads/' . $directory;
+            if (!file_exists($dir_path)) {
+                mkdir($dir_path, 0777, true);
+            }
+            
+            // Move the file to the uploads directory
+            if (move_uploaded_file($file_tmp, $upload_path)) {
+                return 'uploads/' . $directory . '/' . $new_file_name;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+// Function to upload image with additional checks and error messages
+function uploadImage($file, $upload_dir) {
+    // Check if the directory exists, if not create it
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
+    }
+    
+    // Default response structure
+    $response = [
+        'success' => false,
+        'message' => '',
+        'path' => ''
+    ];
+    
+    // Check if file was uploaded
+    if (!isset($file) || $file['error'] != 0) {
+        $response['message'] = 'Error uploading file. Please try again.';
+        return $response;
+    }
+    
+    // Get file info
+    $file_name = basename($file['name']);
+    $file_size = $file['size'];
+    $file_tmp = $file['tmp_name'];
+    $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+    
+    // Set file size limit - 5MB
+    $max_size = 5 * 1024 * 1024;
+    
+    // Check file size
+    if ($file_size > $max_size) {
+        $response['message'] = 'File is too large. Maximum size is 5MB.';
+        return $response;
+    }
+    
+    // Allowed file types
+    $allowed_exts = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    
+    // Check file type
+    if (!in_array($file_ext, $allowed_exts)) {
+        $response['message'] = 'Invalid file type. Allowed types are: ' . implode(', ', $allowed_exts);
+        return $response;
+    }
+    
+    // Generate a unique file name
+    $new_file_name = uniqid() . '_' . str_replace(' ', '_', $file_name);
+    $upload_path = $upload_dir . $new_file_name;
+    
+    // Try to upload the file
+    if (move_uploaded_file($file_tmp, $upload_path)) {
+        // Remove the leading '../' from the path for database storage
+        $db_path = str_replace('../', '', $upload_path);
+        
+        $response['success'] = true;
+        $response['message'] = 'File uploaded successfully.';
+        $response['path'] = $db_path;
+        return $response;
+    } else {
+        $response['message'] = 'Error moving uploaded file. Please try again.';
+        return $response;
+    }
+}
+
+// Function to sanitize input data
+function sanitizeInput($data) {
+    global $conn;
+    
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    if ($conn) {
+        $data = $conn->real_escape_string($data);
+    }
+    return $data;
+}
+
+// Function to delete files
+function deleteFile($file_path) {
+    if (file_exists('../' . $file_path)) {
+        return unlink('../' . $file_path);
+    }
+    return false;
+}
+
+// Function to check if user is logged in
+function isLoggedIn() {
+    return isset($_SESSION['user_id']);
+}
+
+// Function to redirect
+function redirect($url) {
+    header("Location: $url");
+    exit;
+}
+
+// Function to display error messages
+function displayError($message) {
+    return '<div class="alert alert-danger" role="alert">' . $message . '</div>';
+}
+
+// Function to display success messages
+function displaySuccess($message) {
+    return '<div class="alert alert-success" role="alert">' . $message . '</div>';
+}
+
+// Function to truncate text to a certain length
+function truncateText($text, $length = 100) {
+    // Remove HTML tags
+    $text = strip_tags($text);
+    
+    if (strlen($text) > $length) {
+        return substr($text, 0, $length) . '...';
+    }
+    return $text;
+}
+
+// Function to format date
+function formatDate($date, $format = 'd M, Y') {
+    return date($format, strtotime($date));
+}
+
+// Function to get all services
+function getServices($limit = 0, $active_only = true) {
+    global $conn;
+    
+    $sql = "SELECT * FROM services";
+    if ($active_only) {
+        $sql .= " WHERE is_active = 1";
+    }
+    $sql .= " ORDER BY order_number ASC";
+    
+    if ($limit > 0) {
+        $sql .= " LIMIT $limit";
+    }
+    
+    $result = $conn->query($sql);
+    $services = [];
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $services[] = $row;
+        }
+    }
+    
+    return $services;
+}
+
+// Function to get all events
+function getEvents($limit = 0, $active_only = true, $upcoming_only = false) {
+    global $conn;
+    
+    $sql = "SELECT * FROM events";
+    $where = [];
+    
+    if ($active_only) {
+        $where[] = "is_active = 1";
+    }
+    
+    if ($upcoming_only) {
+        $where[] = "event_date >= CURDATE()";
+    }
+    
+    if (!empty($where)) {
+        $sql .= " WHERE " . implode(" AND ", $where);
+    }
+    
+    $sql .= " ORDER BY event_date ASC";
+    
+    if ($limit > 0) {
+        $sql .= " LIMIT $limit";
+    }
+    
+    $result = $conn->query($sql);
+    $events = [];
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $events[] = $row;
+        }
+    }
+    
+    return $events;
+}
+
+// Function to get gallery items
+function getGalleryItems($limit = 0, $type = '', $active_only = true) {
+    global $conn;
+    
+    $sql = "SELECT * FROM gallery";
+    $where = [];
+    
+    if ($active_only) {
+        $where[] = "is_active = 1";
+    }
+    
+    if ($type && in_array($type, ['image', 'video'])) {
+        $where[] = "media_type = '$type'";
+    }
+    
+    if (!empty($where)) {
+        $sql .= " WHERE " . implode(" AND ", $where);
+    }
+    
+    $sql .= " ORDER BY order_number ASC";
+    
+    if ($limit > 0) {
+        $sql .= " LIMIT $limit";
+    }
+    
+    $result = $conn->query($sql);
+    $gallery = [];
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $gallery[] = $row;
+        }
+    }
+    
+    return $gallery;
+}
+
+// Function to get team members
+function getTeamMembers($limit = 0, $active_only = true) {
+    global $conn;
+    
+    $sql = "SELECT * FROM team_members";
+    
+    if ($active_only) {
+        $sql .= " WHERE is_active = 1";
+    }
+    
+    $sql .= " ORDER BY order_number ASC";
+    
+    if ($limit > 0) {
+        $sql .= " LIMIT $limit";
+    }
+    
+    $result = $conn->query($sql);
+    $team = [];
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $team[] = $row;
+        }
+    }
+    
+    return $team;
+}
+
+// Function to get testimonials
+function getTestimonials($limit = 0, $active_only = true) {
+    global $conn;
+    
+    $sql = "SELECT * FROM testimonials";
+    
+    if ($active_only) {
+        $sql .= " WHERE is_active = 1";
+    }
+    
+    $sql .= " ORDER BY order_number ASC";
+    
+    if ($limit > 0) {
+        $sql .= " LIMIT $limit";
+    }
+    
+    $result = $conn->query($sql);
+    $testimonials = [];
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $testimonials[] = $row;
+        }
+    }
+    
+    return $testimonials;
+}
+
+// Function to get projects
+function getProjects($limit = 0, $status = '', $active_only = true) {
+    global $conn;
+    
+    $sql = "SELECT * FROM projects";
+    $where = [];
+    
+    if ($active_only) {
+        $where[] = "is_active = 1";
+    }
+    
+    if ($status && in_array($status, ['upcoming', 'ongoing', 'completed'])) {
+        $where[] = "status = '$status'";
+    }
+    
+    if (!empty($where)) {
+        $sql .= " WHERE " . implode(" AND ", $where);
+    }
+    
+    $sql .= " ORDER BY created_at DESC";
+    
+    if ($limit > 0) {
+        $sql .= " LIMIT $limit";
+    }
+    
+    $result = $conn->query($sql);
+    $projects = [];
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $projects[] = $row;
+        }
+    }
+    
+    return $projects;
+}
+
+// Function to get sliders
+function getSliders($active_only = true) {
+    global $conn;
+    
+    $sql = "SELECT * FROM sliders";
+    
+    if ($active_only) {
+        $sql .= " WHERE is_active = 1";
+    }
+    
+    $sql .= " ORDER BY order_number ASC";
+    
+    $result = $conn->query($sql);
+    $sliders = [];
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $sliders[] = $row;
+        }
+    }
+    
+    return $sliders;
+}
+
+// Function to get contact messages
+function getContactMessages($limit = 0, $status = '') {
+    global $conn;
+    
+    $sql = "SELECT * FROM contact_messages";
+    
+    if ($status && in_array($status, ['unread', 'read', 'replied'])) {
+        $sql .= " WHERE status = '$status'";
+    }
+    
+    $sql .= " ORDER BY created_at DESC";
+    
+    if ($limit > 0) {
+        $sql .= " LIMIT $limit";
+    }
+    
+    $result = $conn->query($sql);
+    $messages = [];
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $messages[] = $row;
+        }
+    }
+    
+    return $messages;
+}
+
+// Function to get donations
+function getDonations($limit = 0) {
+    global $conn;
+    
+    $sql = "SELECT * FROM donations ORDER BY created_at DESC";
+    
+    if ($limit > 0) {
+        $sql .= " LIMIT $limit";
+    }
+    
+    $result = $conn->query($sql);
+    $donations = [];
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $donations[] = $row;
+        }
+    }
+    
+    return $donations;
+}
+
+// Function to count unread messages
+function countUnreadMessages() {
+    global $conn;
+    
+    $sql = "SELECT COUNT(*) as count FROM contact_messages WHERE status = 'unread'";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['count'];
+    }
+    
+    return 0;
+}
+
+// Function to calculate total donations
+function getTotalDonations() {
+    global $conn;
+    
+    $sql = "SELECT SUM(amount) as total FROM donations WHERE status = 'completed'";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['total'] ? $row['total'] : 0;
+    }
+    
+    return 0;
+}
+
+// Function to get a single record by ID from any table
+function getRecordById($table, $id) {
+    global $conn;
+    
+    $id = (int) $id;
+    $sql = "SELECT * FROM `$table` WHERE id = $id LIMIT 1";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        return $result->fetch_assoc();
+    }
+    
+    return false;
+}
+
+// Function to delete a record by ID from any table
+function deleteRecord($table, $id) {
+    global $conn;
+    
+    $id = (int) $id;
+    $sql = "DELETE FROM `$table` WHERE id = $id";
+    
+    return $conn->query($sql);
+}
+
+// Function to toggle active status of a record
+function toggleActiveStatus($table, $id) {
+    global $conn;
+    
+    $id = (int) $id;
+    $sql = "UPDATE `$table` SET is_active = NOT is_active WHERE id = $id";
+    
+    return $conn->query($sql);
+}
+    
+    if ($status && in_array($status, ['unread', 'read', 'replied'])) {
+        $sql .= " WHERE status = '$status'";
+    }
+    
+    $sql .= " ORDER BY created_at DESC";
+    
+    if ($limit > 0) {
+        $sql .= " LIMIT $limit";
+    }
+    
+    $result = $conn->query($sql);
+    $messages = [];
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $messages[] = $row;
+        }
+    }
+    
+    return $messages;
+}
+
+// Function to get donations
+
+// Function to count unread messages
+
+// Function to calculate total donations
+
+// Function to get a single record by ID from any table
+
+// Function to delete a record by ID from any table
+
+// Function to toggle active status of a record

@@ -1,0 +1,467 @@
+/**
+ * Future Hope - Admin Dashboard Styles
+ * Version: 1.0
+ */
+
+/* General Styles */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+    color: #495057;
+    overflow-x: hidden;
+    padding-top: 56px; /* Account for fixed navbar */
+}
+
+/* Navbar Styles */
+.navbar {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1030;
+}
+
+.navbar-brand {
+    font-weight: 500;
+}
+
+.content-title {
+    margin-bottom: 25px;
+}
+
+.card {
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Custom Box Shadow */
+.shadow-sm {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+.shadow-md {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Admin Table Styles */
+.admin-table th {
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.admin-table td {
+    vertical-align: middle;
+}
+
+.admin-table .form-check {
+    margin-bottom: 0;
+}
+
+/* Dashboard Stats Card */
+.stats-card {
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.stats-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    height: auto;
+    padding: 10px 15px;
+    border-color: #e9ecef;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: none;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+/* Custom Card Header */
+.card-header {
+    padding: 15px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-header h5 {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+/* Image Preview */
+.image-preview {
+    width: 100%;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.avatar-preview {
+    width: 150px;
+    height: 150px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+/* Sortable Items */
+.sortable-item {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: move;
+}
+
+.sortable-item .handle {
+    cursor: move;
+    margin-right: 10px;
+}
+
+/* Rich Text Editor */
+.tox-tinymce {
+    border: 1px solid #e9ecef !important;
+}
+
+/* Gallery Item */
+.gallery-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.gallery-item video {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.gallery-title {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 0 10px;
+}
+
+/* Testimonial Card */
+.testimonial-card {
+    text-align: center;
+    padding: 20px;
+}
+
+.testimonial-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/* Team Member Card */
+.team-card {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.team-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 5px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Switch */
+.form-switch .form-check-input {
+    width: 3em;
+    height: 1.5em;
+}
+
+/* Custom Alert */
+.alert {
+    border: none;
+    border-radius: 5px;
+}
+
+/* Custom Badge */
+.badge {
+    font-weight: 500;
+    padding: 5px 10px;
+}
+
+/* Message Item */
+.message-item {
+    position: relative;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.message-item.unread {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.message-item:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.message-meta {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+/* Donation Item */
+.donation-item {
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.donation-item:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.donation-amount {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2ecc71;
+}
+
+.donation-meta {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+/* Project Card */
+.project-card {
+    margin-bottom: 20px;
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.project-progress {
+    height: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.project-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+/* Event Card */
+.event-card {
+    margin-bottom: 20px;
+}
+
+.event-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.event-date {
+    background-color: #3498db;
+    color: #fff;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+/* Service Card */
+.service-card {
+    margin-bottom: 20px;
+}
+
+.service-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.service-icon {
+    font-size: 40px;
+    color: #3498db;
+    margin-bottom: 15px;
+}
+
+/* Custom Colors */
+.bg-purple {
+    background-color: #8e44ad;
+}
+
+.bg-orange {
+    background-color: #e67e22;
+}
+
+.text-purple {
+    color: #8e44ad;
+}
+
+.text-orange {
+    color: #e67e22;
+}
+
+/* Loading Spinner */
+.spinner-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Sidebar and Layout */
+.sidebar {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 240px;
+    height: calc(100vh - 56px);
+    padding: 20px 0;
+    background-color: #343a40;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.sidebar .nav-item {
+    margin-bottom: 5px;
+}
+
+.sidebar .nav-link {
+    color: #ced4da;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    color: #fff;
+    background-color: rgba(255,255,255,0.1);
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.content-wrapper {
+    margin-left: 240px;
+    padding: 85px 25px 25px;
+    min-height: calc(100vh - 56px);
+    transition: all 0.3s ease;
+}
+
+/* Responsive Styles */
+@media (max-width: 767px) {
+    .sidebar {
+        margin-left: -240px;
+    }
+    
+    .sidebar.show {
+        margin-left: 0;
+    }
+    
+    .content-wrapper {
+        margin-left: 0;
+        padding: 70px 15px 15px;
+    }
+    
+    .card-header {
+        padding: 10px 15px;
+    }
+    
+    .stats-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}

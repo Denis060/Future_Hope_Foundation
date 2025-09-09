@@ -1,0 +1,37 @@
+# Ignore configuration files that may contain sensitive information
+/includes/config.php
+
+# Ignore uploaded files
+/uploads/*
+!/uploads/index.html
+
+# Ignore cache and temporary files
+/cache/*
+/tmp/*
+/.sass-cache/
+/.cache/
+/.tmp/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+*.log
+*.bak
+*.swp
+*.swo
+
+# Ignore vendor directories
+/vendor/
+
+# Ignore node modules
+/node_modules/
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore IDE/Editor specific files
+.vscode/
+.idea/
+*.sublime-*
+*.code-workspace
