@@ -25,7 +25,7 @@ This is a complete PHP website for the Future Hope Foundation, a nonprofit chari
    - Default database credentials:
      - Host: localhost
      - User: root
-     - Password: Denis55522
+     - Password: [PASSWORD REMOVED]
      - Database: futurehope_db
 
 2. **Admin Access**:
