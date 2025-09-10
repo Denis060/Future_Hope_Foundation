@@ -92,7 +92,10 @@ $settings = getSettings($conn);
                 <div class="container-fluid px-0">
                     <a class="navbar-brand" href="index.php">
                         <?php if (!empty($settings['site_logo'])): ?>
-                        <img src="<?php echo $settings['site_logo']; ?>" alt="<?php echo $settings['site_name']; ?>" class="logo">
+                        <div class="logo-container">
+                            <img src="<?php echo $settings['site_logo']; ?>" alt="<?php echo $settings['site_name']; ?>" class="logo">
+                            <span class="site-name-mobile d-lg-none">Future Hope</span>
+                        </div>
                         <?php else: ?>
                         <h2><?php echo $settings['site_name']; ?></h2>
                         <?php endif; ?>

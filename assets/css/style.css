@@ -878,3 +878,32 @@ textarea.form-control {
         height: 350px;
     }
 }
+
+/* Logo and Site Name Styling */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.site-name-mobile {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+}
+
+/* Hide site name on desktop */
+@media (min-width: 992px) {
+    .site-name-mobile {
+        display: none;
+    }
+}
+
+/* Adjust logo size on mobile */
+@media (max-width: 575px) {
+    .logo {
+        max-height: 60px;
+    }
+}
