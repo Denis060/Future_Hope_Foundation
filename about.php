@@ -58,26 +58,155 @@ $settings = getSettings($conn);
 <!-- Background Section -->
 <section class="background-section py-5 bg-light">
     <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-title fade-in">Our Journey</h2>
+                <p class="lead text-muted mb-0 fade-in">A Brief Background About Future Hope Foundation</p>
+            </div>
+        </div>
+        
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="text-center mb-4">A Brief Background About Future Hope Foundation</h2>
-                <div class="card border-0 shadow-sm p-4">
-                    <div class="card-body">
-                        <p>Future Hope Foundation was founded during the Ebola epidemic in Sierra Leone in 2014. The current Director General of the foundation, Abu Bakarr Conteh, was a volunteer for the All Political Party Association (APPA), the organization monitoring the Ebola Quarantine Homes in the Western Area Rural District.</p>
-                        
-                        <p>A lots of unfortunate and traumatic incidences took place during that sad period of our country's history, ranging from displacement, improper monitoring mechanisms, food shortage and hunger in Quarantine Homes. This eventually made life for the victims very difficult.</p>
-                        
-                        <p>The lack of proper security made way for victims to go out and fend for themselves outside the quarantine homes just to survive the scurging hunger.</p>
-                        
-                        <p>Among the worst incidences that caused struggles and hardship for the victims in quarantine homes were ineffective security and proper manning of the homes where the victims were kept so they will not go out and spread the virus. In the quarantine home where they were kept, a lot was expected from those responsible to provide them their basic necessities such as food, but sadly they could not, so the victims quarantined had to move around, spreading the virus in and around the communities they went to in search of food and other basic needs.</p>
-                        
-                        <p>The greatest challenge was that the community people were restricted to go into the quarantine homes. This limited the support they could provide to the victims. This resulted to unforseen hardship, hunger and other trouble on the victims that surpassed the epidemic itself.</p>
-                        
-                        <p>I discovered all those unfortunate incidents during my service with APPA. Touched with the feeling to help those victims in hunger, and urged to provide services that will ease up their suffering, I was able to see how children suffer greatly, the help they desire but could not get and what intervention that can help alleviate their sufferings. Then the idea of establishing an organisation that could support government's efforts and restore the lost hope in these children came up in mind and it resulted to founding of Future Hope Foundation.</p>
-                        
-                        <p>Filled with the idea of helping the children, I spent all the money I was paid, including my transportation and feeding allowances on those children just to encourage and make them live happily. After that entire exercise, I spoke with a brother, Osman Jalloh, who supported the idea and vision by providing funds for the registration of the foundation.</p>
-                        
-                        <p>Officially, the organisation was registered under Corporate Affairs Commission on the 26th January, 2015. Since then, the strive to support and keep children happy started under Future Hope Foundation.</p>
+                <div class="timeline">
+                    <!-- 2014: Ebola Epidemic -->
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-year">
+                            <span>2014 Ebola Crisis</span>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <h4 class="timeline-title">Ebola Epidemic Crisis</h4>
+                                    <div class="timeline-marker"></div>
+                                    <p>Future Hope Foundation was conceptualized during the Ebola epidemic in Sierra Leone. Abu Bakarr Conteh, now Director General, worked as a volunteer with the All Political Party Association (APPA), monitoring Ebola Quarantine Homes in the Western Area Rural District.</p>
+                                    
+                                    <div class="timeline-gallery row mt-3 g-3">
+                                        <div class="col-md-6">
+                                            <div class="crisis-point">
+                                                <i class="fas fa-utensils text-danger"></i>
+                                                <h5 class="h6">Food Shortages</h5>
+                                                <p class="small">Serious food shortages and hunger in Quarantine Homes made life for victims extremely difficult.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="crisis-point">
+                                                <i class="fas fa-user-shield text-danger"></i>
+                                                <h5 class="h6">Security Issues</h5>
+                                                <p class="small">Lack of proper security forced victims to leave quarantine areas to find food, causing virus spread.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Late 2014: Inspiration -->
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-year">
+                            <span>Late 2014<br>Inspiration</span>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <h4 class="timeline-title">The Spark of Inspiration</h4>
+                                    <div class="timeline-marker"></div>
+                                    <p>During his service with APPA, Abu Bakarr Conteh was deeply moved by the suffering of children. Witnessing their struggles firsthand, he felt compelled to take action beyond his official duties.</p>
+                                    <p>Motivated by compassion, he used his own resources, including personal allowances, to provide for children in need. Their faces lit up with hope, inspiring him to create a permanent solution to their plight.</p>
+                                    <div class="text-center mt-3">
+                                        <span class="badge bg-primary p-2"><i class="fas fa-lightbulb me-1"></i> Birth of a Vision</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- January 2015: Official Registration -->
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-year">
+                            <span>January 26, 2015</span>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <h4 class="timeline-title">Official Foundation Establishment</h4>
+                                    <div class="timeline-marker"></div>
+                                    <p>With financial support from Osman Jalloh who believed in the vision, Future Hope Foundation was officially registered under the Corporate Affairs Commission.</p>
+                                    <p>This marked the beginning of a structured effort to support vulnerable children and restore hope in their lives through sustainable programs.</p>
+                                    <div class="d-flex align-items-center justify-content-center mt-3">
+                                        <i class="fas fa-certificate text-success me-2"></i>
+                                        <span class="fw-bold">Official Registration Document #FHF-2015-01</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2015-Present: Growth and Impact -->
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-year">
+                            <span>2015-Present<br>Growth</span>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <h4 class="timeline-title">A Decade of Growth and Impact</h4>
+                                    <div class="timeline-marker"></div>
+                                    <p>Since its establishment, Future Hope Foundation has been dedicated to bringing smiles to children's faces and hope to their hearts. Our programs have expanded across communities, focusing on education, healthcare, advocacy, and support for vulnerable children.</p>
+                                    
+                                    <div class="row mt-4 impact-stats text-center g-3">
+                                        <div class="col-md-3 col-sm-6">
+                                            <div class="impact-item">
+                                                <i class="fas fa-users text-primary"></i>
+                                                <h5>1,000+</h5>
+                                                <p>Children Supported</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6">
+                                            <div class="impact-item">
+                                                <i class="fas fa-graduation-cap text-primary"></i>
+                                                <h5>500+</h5>
+                                                <p>Educational Scholarships</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6">
+                                            <div class="impact-item">
+                                                <i class="fas fa-hands-helping text-primary"></i>
+                                                <h5>20+</h5>
+                                                <p>Community Programs</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6">
+                                            <div class="impact-item">
+                                                <i class="fas fa-map-marker-alt text-primary"></i>
+                                                <h5>10+</h5>
+                                                <p>Communities Served</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Future -->
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-year">
+                            <span>Future<br>Vision</span>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <h4 class="timeline-title">Our Vision for the Future</h4>
+                                    <div class="timeline-marker"></div>
+                                    <p>As we look ahead, Future Hope Foundation remains committed to expanding our reach and deepening our impact. We envision a world where every child has access to education, healthcare, and opportunities to thrive regardless of their circumstances.</p>
+                                    
+                                    <div class="text-center mt-3">
+                                        <a href="donate.php" class="btn btn-primary">Join Our Mission</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,35 +218,146 @@ $settings = getSettings($conn);
 <section class="objectives-section py-5">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center mb-4">
-                <h2>Our Objectives</h2>
-                <div class="separator-line mx-auto"></div>
+            <div class="col-lg-12 text-center mb-5">
+                <h2 class="section-title fade-in">Our Objectives</h2>
+                <p class="lead text-muted mb-0 fade-in">Working together to create lasting impact for children in need</p>
             </div>
         </div>
         
         <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <ul class="objectives-list">
-                                    <li>To promote educational programs for orphans and the vulnerable children in our communities.</li>
-                                    <li>To seek for the right of children mainly through sensitisation and advocacy with community leaders by conducting seminars, workshops and radio programmes.</li>
-                                    <li>To initiate and promote programs concerned with provision of relief aid, rehabilitation and development of children.</li>
-                                    <li>To build an academically sound, moral upright and self-contained society.</li>
-                                    <li>To encourage good and qualitative education through sponsorship.</li>
-                                    <li>To coordinate activities of national and international interests with potential donors, charitable organisations and other NGOs.</li>
-                                </ul>
+            <div class="col-lg-12">
+                <div class="row g-4">
+                    <!-- Objective 1 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="objective-card h-100 fade-in">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4">
+                                    <div class="objective-icon mb-3">
+                                        <i class="fas fa-graduation-cap text-primary"></i>
+                                    </div>
+                                    <h4 class="card-title h5 mb-3">Educational Support</h4>
+                                    <p class="card-text">To promote educational programs for orphans and the vulnerable children in our communities.</p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <ul class="objectives-list">
-                                    <li>To put in place effect management of funds and all donations geared towards benefiting orphans and the less privileged.</li>
-                                    <li>To support girl child education by linking them to organisations that gives scholarships in any part of the world.</li>
-                                    <li>To undertake programs centred on children's right and gender awareness through rural community sensitisations and intimate training on gender issues so as to promote gender equality.</li>
-                                    <li>To coordinate and work amicably with other organisations with similar intersections, aims and objectives.</li>
-                                    <li>To undertake any other relevant matter that may arise from time to time.</li>
-                                </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Objective 2 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="objective-card h-100 fade-in">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4">
+                                    <div class="objective-icon mb-3">
+                                        <i class="fas fa-bullhorn text-primary"></i>
+                                    </div>
+                                    <h4 class="card-title h5 mb-3">Child Rights Advocacy</h4>
+                                    <p class="card-text">To seek for the right of children through sensitisation and advocacy with community leaders by conducting seminars, workshops and radio programmes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Objective 3 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="objective-card h-100 fade-in">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4">
+                                    <div class="objective-icon mb-3">
+                                        <i class="fas fa-hands-helping text-primary"></i>
+                                    </div>
+                                    <h4 class="card-title h5 mb-3">Relief & Development</h4>
+                                    <p class="card-text">To initiate and promote programs concerned with provision of relief aid, rehabilitation and development of children.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Objective 4 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="objective-card h-100 fade-in">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4">
+                                    <div class="objective-icon mb-3">
+                                        <i class="fas fa-building text-primary"></i>
+                                    </div>
+                                    <h4 class="card-title h5 mb-3">Community Building</h4>
+                                    <p class="card-text">To build an academically sound, moral upright and self-contained society.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Objective 5 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="objective-card h-100 fade-in">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4">
+                                    <div class="objective-icon mb-3">
+                                        <i class="fas fa-award text-primary"></i>
+                                    </div>
+                                    <h4 class="card-title h5 mb-3">Education Quality</h4>
+                                    <p class="card-text">To encourage good and qualitative education through sponsorship.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Objective 6 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="objective-card h-100 fade-in">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4">
+                                    <div class="objective-icon mb-3">
+                                        <i class="fas fa-globe-africa text-primary"></i>
+                                    </div>
+                                    <h4 class="card-title h5 mb-3">Global Partnerships</h4>
+                                    <p class="card-text">To coordinate activities with potential donors, charitable organisations and other NGOs nationally and internationally.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Objective 7 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="objective-card h-100 fade-in">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4">
+                                    <div class="objective-icon mb-3">
+                                        <i class="fas fa-chart-line text-primary"></i>
+                                    </div>
+                                    <h4 class="card-title h5 mb-3">Resource Management</h4>
+                                    <p class="card-text">To put in place effect management of funds and all donations geared towards benefiting orphans and the less privileged.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Objective 8 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="objective-card h-100 fade-in">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4">
+                                    <div class="objective-icon mb-3">
+                                        <i class="fas fa-female text-primary"></i>
+                                    </div>
+                                    <h4 class="card-title h5 mb-3">Girl Child Support</h4>
+                                    <p class="card-text">To support girl child education by linking them to organisations that gives scholarships in any part of the world.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Objective 9 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="objective-card h-100 fade-in">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4">
+                                    <div class="objective-icon mb-3">
+                                        <i class="fas fa-balance-scale text-primary"></i>
+                                    </div>
+                                    <h4 class="card-title h5 mb-3">Gender Equality</h4>
+                                    <p class="card-text">To undertake programs on children's rights and gender awareness through rural community sensitisations to promote gender equality.</p>
+                                </div>
                             </div>
                         </div>
                     </div>

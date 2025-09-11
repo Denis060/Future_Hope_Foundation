@@ -133,6 +133,9 @@
     <!-- Fix for mobile date widget -->
     <script src="assets/js/fix-mobile-date.js"></script>
     
+    <!-- Timeline JS for About page -->
+    <script src="assets/js/timeline.js"></script>
+    
     <!-- Page specific JS -->
     <?php if (isset($additional_js)): echo $additional_js; endif; ?>
     

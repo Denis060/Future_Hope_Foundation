@@ -57,6 +57,7 @@ $settings = getSettings($conn);
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/enhanced-style.css">
+    <link rel="stylesheet" href="assets/css/timeline.css">
     
     <!-- Fix for mobile date widget -->
     <link rel="stylesheet" href="assets/css/fix-mobile-date.css">
