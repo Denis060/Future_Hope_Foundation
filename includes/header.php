@@ -17,11 +17,25 @@ $settings = getSettings($conn);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($page_title) ? $page_title . ' - ' . $settings['site_name'] : $settings['site_name']; ?></title>
+    <meta name="format-detection" content="telephone=no, date=no">
+    <meta name="theme-color" content="#3498db">
+    <meta name="description" content="<?php echo isset($page_description) ? htmlspecialchars($page_description) : 'Future Hope Foundation is dedicated to supporting children and vulnerable communities through education, healthcare and sustainable development.'; ?>">
+    <meta name="keywords" content="nonprofit, charity, foundation, donation, volunteer, children, education, healthcare, community development">
+    <meta name="author" content="Future Hope Foundation">
+    <meta property="og:title" content="<?php echo isset($page_title) ? htmlspecialchars($page_title) . ' - ' . htmlspecialchars($settings['site_name']) : htmlspecialchars($settings['site_name']); ?>">
+    <meta property="og:description" content="<?php echo isset($page_description) ? htmlspecialchars($page_description) : 'Future Hope Foundation is dedicated to supporting children and vulnerable communities through education, healthcare and sustainable development.'; ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>">
+    <?php if (!empty($settings['site_logo'])): ?>
+    <meta property="og:image" content="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/" . $settings['site_logo']; ?>">
+    <?php endif; ?>
+    
+    <title><?php echo isset($page_title) ? htmlspecialchars($page_title) . ' - ' . htmlspecialchars($settings['site_name']) : htmlspecialchars($settings['site_name']); ?></title>
     
     <!-- Favicon -->
     <?php if (!empty($settings['site_logo'])): ?>
     <link rel="shortcut icon" href="<?php echo $settings['site_logo']; ?>" type="image/x-icon">
+    <link rel="apple-touch-icon" href="<?php echo $settings['site_logo']; ?>">
     <?php endif; ?>
     
     <!-- Bootstrap CSS -->
@@ -42,11 +56,16 @@ $settings = getSettings($conn);
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/enhanced-style.css">
+    
+    <!-- Fix for mobile date widget -->
+    <link rel="stylesheet" href="assets/css/fix-mobile-date.css">
     
     <!-- Page specific CSS -->
     <?php if (isset($additional_css)): echo $additional_css; endif; ?>
 </head>
 <body>
+    <?php include 'includes/preloader.php'; ?>
     <!-- Top Bar -->
     <div class="top-bar bg-light py-2">
         <div class="container">

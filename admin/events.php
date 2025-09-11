@@ -92,7 +92,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if (in_array(strtolower($file_ext), $allowed)) {
             $new_name = 'event_' . time() . '.' . $file_ext;
-            $destination = '../uploads/' . $new_name;
+            $upload_dir = '../uploads/';
+            
+            // Create uploads directory if it doesn't exist
+            if (!is_dir($upload_dir)) {
+                mkdir($upload_dir, 0777, true);
+            }
+            
+            $destination = $upload_dir . $new_name;
             
             if (move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
                 $image_name = $new_name;

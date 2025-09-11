@@ -1,4 +1,7 @@
 <?php
+// Start output buffering to catch any unexpected output
+ob_start();
+
 // Set page title
 $page_title = "Events";
 include 'includes/header.php';
@@ -139,4 +142,8 @@ if ($past_events_result->num_rows > 0) {
     </div>
 </section>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'includes/footer.php'; 
+
+// End output buffering and send content to browser
+ob_end_flush();
+?>

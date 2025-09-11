@@ -1,0 +1,31 @@
+/* Custom CSS to hide the mobile date/calendar widget */
+.mobile-date-widget, 
+[class*="date-widget"],
+.calendar-widget,
+div[class*="calendar"] {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Hide any element that matches the calendar icon with date format */
+div:has(i.fa-calendar-alt) + span:contains("Sep"),
+div:has(> span:contains("Sep")) {
+    display: none !important;
+}
+
+/* Target the specific blue bar shown in the screenshot */
+.bg-primary.text-white:has(> .fa-calendar-alt),
+div[style*="background-color: #0d6efd"] {
+    display: none !important;
+}
+
+/* Target the specific date format seen in the screenshot */
+div:contains("Sep 13, 2025 at 19:54:00") {
+    display: none !important;
+}
+
+/* Hide specific widget at the top of the page */
+body > div.container-fluid:first-child,
+body > div:first-child:has(i.fa-calendar) {
+    display: none !important;
+}

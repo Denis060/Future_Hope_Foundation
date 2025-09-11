@@ -356,7 +356,7 @@ $team_members = getTeamMembers(4);
                 <div class="event-box">
                     <div class="event-image">
                         <?php if (!empty($event['image'])): ?>
-                        <img src="<?php echo $event['image']; ?>" alt="<?php echo $event['title']; ?>" class="img-fluid">
+                        <img src="<?php echo getImageUrl($event['image']); ?>" alt="<?php echo $event['title']; ?>" class="img-fluid">
                         <?php else: ?>
                         <img src="assets/images/event-placeholder.jpg" alt="<?php echo $event['title']; ?>" class="img-fluid">
                         <?php endif; ?>
@@ -457,7 +457,7 @@ $team_members = getTeamMembers(4);
             <div class="testimonial-box">
                 <?php if (!empty($testimonial['image'])): ?>
                 <div class="testimonial-image">
-                    <img src="<?php echo $testimonial['image']; ?>" alt="<?php echo $testimonial['name']; ?>" class="img-fluid">
+                    <img src="<?php echo getImageUrl($testimonial['image']); ?>" alt="<?php echo $testimonial['name']; ?>" class="img-fluid">
                 </div>
                 <?php endif; ?>
                 <div class="testimonial-text">
@@ -517,7 +517,7 @@ $team_members = getTeamMembers(4);
                 <div class="team-member">
                     <div class="team-image">
                         <?php if (!empty($member['image'])): ?>
-                        <img src="<?php echo $member['image']; ?>" alt="<?php echo $member['name']; ?>" class="img-fluid">
+                        <img src="<?php echo getImageUrl($member['image']); ?>" alt="<?php echo $member['name']; ?>" class="img-fluid">
                         <?php else: ?>
                         <img src="assets/images/team-placeholder.jpg" alt="<?php echo $member['name']; ?>" class="img-fluid">
                         <?php endif; ?>

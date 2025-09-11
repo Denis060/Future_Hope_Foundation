@@ -2,6 +2,9 @@
 // Include database connection
 require_once 'config.php';
 
+// Include enhanced image functions
+require_once 'image-functions.php';
+
 // Function to upload files
 function uploadFile($file, $directory = 'images', $allowed_types = ['jpg', 'jpeg', 'png', 'gif']) {
     global $conn;
@@ -94,6 +97,27 @@ function sanitizeInput($input) {
     }
     
     // Note: get_magic_quotes_gpc() is deprecated in PHP 7.4 and removed in PHP 8.0
+    
+    $input = htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
+    
+    if ($conn) {
+        $input = $conn->real_escape_string($input);
+    }
+    
+    return $input;
+}
+
+/**
+ * Legacy sanitize function (alias for sanitizeInput)
+ * Used in older parts of the codebase
+ */
+function sanitize($conn, $input) {
+    if (is_array($input)) {
+        foreach ($input as $key => $value) {
+            $input[$key] = sanitize($conn, $value);
+        }
+        return $input;
+    }
     
     $input = htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
     
@@ -554,16 +578,83 @@ function formatDate($date, $format = 'd M, Y') {
 // Function to get image url with correct path
 function getImageUrl($image) {
     if (empty($image)) {
-        return '';
+        return 'assets/images/placeholder.jpg'; // Return a default placeholder image
     }
     
     // Check if the image already has a path
     if (strpos($image, 'http://') === 0 || 
-        strpos($image, 'https://') === 0 || 
-        strpos($image, 'uploads/') === 0 ||
-        strpos($image, 'assets/') === 0) {
+        strpos($image, 'https://') === 0) {
+        // External URL, return as is
         return $image;
     }
     
+    // Check if image starts with uploads/ or assets/
+    if (strpos($image, 'uploads/') === 0 || strpos($image, 'assets/') === 0) {
+        // Path already includes uploads/ or assets/ prefix, return as is
+        return $image;
+    }
+    
+    // If path starts with a slash, remove it
+    if (strpos($image, '/') === 0) {
+        $image = substr($image, 1);
+    }
+    
+    // For testimonials and other uploaded images that might only have the filename stored
+    // Simply prepend 'uploads/' without checking file existence (which can fail due to relative path issues)
     return 'uploads/' . $image;
+}
+
+/**
+ * Get website settings from the database
+ * 
+ * @param mysqli $conn Database connection
+ * @return array Settings array
+ */
+function getSettings($conn = null) {
+    $settings = [];
+    
+    // Check if connection exists
+    if (!$conn) {
+        // Set default values if no connection
+        return [
+            'site_name' => 'Future Hope Foundation',
+            'site_logo' => 'assets/images/logo.png',
+            'site_email' => 'info@futurehope.org',
+            'site_phone' => '+1 (123) 456-7890',
+            'site_address' => '123 Charity Street, City, Country',
+            'facebook_url' => '',
+            'twitter_url' => '',
+            'instagram_url' => '',
+            'youtube_url' => '',
+            'mission_statement' => 'Our mission is to help those in need and create a better future for all.',
+            'vision_statement' => 'A world where everyone has equal opportunities and access to resources.',
+            'about_content' => 'Future Hope Foundation was founded during the Ebola epidemic in Sierra Leone in 2014.'
+        ];
+    }
+    
+    // Get settings from database
+    $sql = "SELECT * FROM settings LIMIT 1";
+    $result = $conn->query($sql);
+    
+    if ($result && $result->num_rows > 0) {
+        $settings = $result->fetch_assoc();
+    } else {
+        // Set default values if not found in database
+        $settings = [
+            'site_name' => 'Future Hope Foundation',
+            'site_logo' => 'assets/images/logo.png',
+            'site_email' => 'info@futurehope.org',
+            'site_phone' => '+1 (123) 456-7890',
+            'site_address' => '123 Charity Street, City, Country',
+            'facebook_url' => '',
+            'twitter_url' => '',
+            'instagram_url' => '',
+            'youtube_url' => '',
+            'mission_statement' => 'Our mission is to help those in need and create a better future for all.',
+            'vision_statement' => 'A world where everyone has equal opportunities and access to resources.',
+            'about_content' => 'Future Hope Foundation was founded during the Ebola epidemic in Sierra Leone in 2014.'
+        ];
+    }
+    
+    return $settings;
 }

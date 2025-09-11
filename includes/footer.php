@@ -128,8 +128,15 @@
     
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/enhanced.js"></script>
+    
+    <!-- Fix for mobile date widget -->
+    <script src="assets/js/fix-mobile-date.js"></script>
     
     <!-- Page specific JS -->
     <?php if (isset($additional_js)): echo $additional_js; endif; ?>
+    
+    <!-- Schema.org structured data for SEO -->
+    <?php include 'includes/schema.php'; ?>
 </body>
 </html>

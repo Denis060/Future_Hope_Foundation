@@ -104,7 +104,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if (in_array($file_ext, $allowed_extensions)) {
             $new_file_name = 'gallery_' . time() . '.' . $file_ext;
-            $destination = '../uploads/' . $new_file_name;
+            $upload_dir = '../uploads/';
+            
+            // Create uploads directory if it doesn't exist
+            if (!is_dir($upload_dir)) {
+                mkdir($upload_dir, 0777, true);
+            }
+            
+            $destination = $upload_dir . $new_file_name;
             
             if (move_uploaded_file($file_tmp, $destination)) {
                 $file_path = $new_file_name;

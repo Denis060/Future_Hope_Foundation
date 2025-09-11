@@ -1,0 +1,56 @@
+# Future Hope Foundation .htaccess file
+# Enhance security and performance
+
+# Custom 404 error page
+ErrorDocument 404 /404.php
+
+# Protect against directory listing
+Options -Indexes
+
+# Protect against access to sensitive files
+<FilesMatch "^(\.htaccess|\.htpasswd|config\.php|README\.md)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+
+# Enable gzip compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/x-javascript application/json
+</IfModule>
+
+# Set browser caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType application/x-javascript "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresDefault "access plus 2 days"
+</IfModule>
+
+# Prevent access to the wp-admin directory if it exists
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_URI} ^/wp-admin [NC]
+RewriteRule ^(.*)$ - [F,L]
+</IfModule>
+
+# Disable server signature
+ServerSignature Off
+
+# Add security headers
+<IfModule mod_headers.c>
+  # XSS Protection
+  Header set X-XSS-Protection "1; mode=block"
+  # Prevent MIME-type sniffing
+  Header set X-Content-Type-Options "nosniff"
+  # Referrer Policy
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  # Content Security Policy (adjust as needed)
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com 'unsafe-inline'; style-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self';"
+</IfModule>
