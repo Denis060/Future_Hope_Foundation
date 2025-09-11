@@ -581,6 +581,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary" id="saveTeamMember"><i class="fas fa-save me-1"></i> Save Team Member</button>
+                            <!-- Direct submit button in case the saveTeamMember button doesn't work -->
+                            <button type="submit" form="teamMemberForm" class="btn btn-success d-none" id="directSubmit">Direct Submit</button>
                         </div>
                     </div>
                 </div>
@@ -641,16 +643,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             });
             
             // Initialize Summernote editor
-            $('#bio').summernote({
-                height: 200,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'clear']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['insert', ['link']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
+            try {
+                $('#bio').summernote({
+                    height: 200,
+                    toolbar: [
+                        ['style', ['style']],
+                        ['font', ['bold', 'italic', 'underline', 'clear']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['insert', ['link']],
+                        ['view', ['fullscreen', 'codeview', 'help']]
+                    ],
+                    callbacks: {
+                        onImageUpload: function(files) {
+                            // Disable image upload via editor to prevent issues
+                            alert('Please add team member first, then edit to add images');
+                        }
+                    }
+                });
+                console.log('Summernote initialized successfully');
+            } catch (e) {
+                console.error('Summernote initialization error:', e);
+                // Fallback to regular textarea if Summernote fails
+                $('#bio').css('height', '200px');
+            }
             
             // Show modal when Add New Team Member button is clicked
             $('.btn-add-new').click(function() {
@@ -701,7 +716,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Handle Save Button Click in Modal
             $('#saveTeamMember').click(function() {
                 if ($('#name').val() && $('#position').val()) {
-                    $('#teamMemberForm').submit();
+                    console.log('Submitting team member form...');
+                    try {
+                        // Ensure the form content is properly set before submission
+                        const formData = new FormData($('#teamMemberForm')[0]);
+                        // Log form data (for debug only)
+                        for (let pair of formData.entries()) {
+                            console.log(pair[0] + ': ' + pair[1]);
+                        }
+                        // Submit the form
+                        $('#teamMemberForm').submit();
+                    } catch (e) {
+                        console.error('Form submission error:', e);
+                        alert('An error occurred during form submission. Please check the console for details.');
+                    }
                 } else {
                     alert('Please fill in all required fields.');
                 }
